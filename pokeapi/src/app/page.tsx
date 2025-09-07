@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState, useCallback } from "react";
-import styles from "./globals.module.css";
+import styles from "../css/globals.module.css";
 import Navbar from "./components/Navber";
 import Footer from "./components/Footer";
 import PokemonModal from "./components/PokemonModal";

@@ -1,5 +1,5 @@
 "use client";
-import styles from "../globals.module.css";
+import styles from "../../css/globals.module.css";
 
 export default function Navbar() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import styles from "../globals.module.css";
+import styles from "../../css/globals.module.css";
 import { useState, useEffect } from "react";
 import type { PokemonDetail } from "../types"; // 👈 Import จากไฟล์ใหม่
 
