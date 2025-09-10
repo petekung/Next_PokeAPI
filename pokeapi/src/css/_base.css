@@ -1,0 +1,152 @@
+/* General Body & Navbar */
+:root {
+    --primary-color: #0d6efd;
+    --dark-grey: #2d3436;
+    --light-grey: #f1f2f6;
+    --text-color: #636e72;
+}
+
+body {
+    background-color: var(--light-grey);
+    color: var(--text-color);
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+/* Offcanvas Styles */
+.offcanvas-header {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.offcanvas-title {
+    font-weight: bold;
+}
+
+.offcanvas-body {
+    padding: 1.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) { /* Large devices (desktops, 992px and up) */
+    #detailModal .modal-body {
+        padding: 1rem;
+    }
+    .col-lg-5.text-center {
+        margin-bottom: 1.5rem;
+    }
+    .main-img-container {
+        height: 200px;
+    }
+    .evolution-img {
+        width: 60px;
+        height: 60px;
+    }
+    .evolution-arrow {
+        font-size: 1.2rem;
+        margin: 0 0.25rem;
+    }
+    .stat-name {
+        width: 100px;
+        font-size: 0.9rem;
+    }
+    .stat-value {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 767.98px) { /* Medium devices (tablets, 768px and up) */
+    .card-img-top {
+        height: 150px;
+    }
+    .product-card {
+        margin-bottom: 1rem;
+    }
+    #detailModal .modal-header {
+        padding: 1rem 1.5rem;
+    }
+    #detailModal .modal-title {
+        font-size: 1.5rem;
+    }
+    .main-img-container {
+        height: 180px;
+    }
+    .sprite-gallery-img {
+        width: 60px;
+        height: 60px;
+    }
+    .stat-row {
+        flex-wrap: wrap;
+        margin-bottom: 0.5rem;
+    }
+    .stat-name {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 0.25rem;
+    }
+    .stat-value {
+        width: auto;
+        margin-left: auto;
+    }
+    .stat-bar-container {
+        width: 100%;
+    }
+    .evolution-chain {
+        flex-direction: column;
+    }
+    .evolution-arrow {
+        transform: rotate(90deg);
+        margin: 0.5rem 0;
+    }
+}
+
+@media (max-width: 575.98px) { /* Small devices (landscape phones, 576px and up) */
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    .card-img-top {
+        height: 120px;
+    }
+    .card-title {
+        font-size: 1rem;
+    }
+    .card-text {
+        font-size: 1rem;
+    }
+    #detailModal .modal-body {
+        padding: 0.75rem;
+    }
+    .main-img-container {
+        height: 150px;
+    }
+    .sprite-gallery-img {
+        width: 50px;
+        height: 50px;
+    }
+    .evolution-img {
+        width: 50px;
+        height: 50px;
+    }
+    .evolution-arrow {
+        font-size: 1rem;
+    }
+    .stat-name, .stat-value {
+        font-size: 0.85rem;
+    }
+
+    .navbar-nav .nav-item {
+        width: 100%;
+        margin-left: 0 !important;
+        margin-bottom: 0.5rem;
+    }
+
+    .navbar-nav .nav-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .navbar-nav .nav-item .btn {
+        width: 100%;
+    }
+}

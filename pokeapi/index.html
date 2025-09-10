@@ -7,38 +7,104 @@
     <title>ร้านค้าโปเกมอน</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="src/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><i class="bi bi-box-seam-fill"></i> ร้านค้าโปเกมอน</a>
-            <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#cartModal">
-                <i class="bi bi-cart-fill"></i> ตะกร้า <span class="badge bg-danger" id="cart-count">0</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="collapse navbar-collapse " style="margin-top: 10px;" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#cartModal">
+                            <i class="bi bi-cart-fill"></i> ตะกร้า <span class="badge bg-danger"
+                                id="cart-count">0</span>
+                        </button>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <button class="btn btn-outline-info" type="button" data-bs-toggle="modal"
+                            data-bs-target="#compareModal">
+                            <i class="bi bi-columns-gap"></i> เปรียบเทียบ
+                        </button>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <button class="btn btn-outline-success" type="button" data-bs-toggle="modal"
+                            data-bs-target="#teamBuilderModal">
+                            <i class="bi bi-people-fill"></i> ทีมของฉัน
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <!-- Search and Filters -->
+    <!-- Filter Button -->
     <div class="container mt-4">
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <input type="text" id="pokemon-search" class="form-control" placeholder="ค้นหาโปเกมอน...">
-            </div>
-            <div class="col-md-6">
-                <div id="type-filters" class="d-flex flex-wrap justify-content-end gap-2">
-                    <!-- Type filter buttons will be inserted here by JavaScript -->
-                </div>
-            </div>
+        <div class="text-end mb-3">
+            <button class="btn btn-outline-secondary me-2" type="button" id="reset-filters-btn">
+                <i class="bi bi-arrow-counterclockwise"></i> รีเซ็ตตัวกรอง
+            </button>
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
+                <i class="bi bi-funnel-fill"></i> ตัวกรอง
+            </button>
         </div>
 
         <!-- Products -->
         <div id="product-list" class="row g-4">
             <!-- Product cards will be inserted here by JavaScript -->
+        </div>
+
+        <div class="text-center mt-4 mb-4" style="display: flex; justify-content: center;">
+            <button id="load-more-btn" class="btn btn-primary">โหลดเพิ่มเติม</button>
+        </div>
+
+
+    </div>
+
+    <!-- Offcanvas Filters -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasFilters" aria-labelledby="offcanvasFiltersLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasFiltersLabel">ตัวกรองและเรียงลำดับ</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="mb-3">
+                <label for="pokemon-search" class="form-label">ค้นหาโปเกมอน</label>
+                <input type="text" id="pokemon-search" class="form-control" placeholder="ค้นหาโปเกมอน...">
+            </div>
+            <div class="mb-3">
+                <label for="sort-by" class="form-label">เรียงลำดับตาม</label>
+                <select id="sort-by" class="form-select">
+                    <option value="id-asc">เรียงตาม ID (น้อยไปมาก)</option>
+                    <option value="id-desc">เรียงตาม ID (มากไปน้อย)</option>
+                    <option value="name-asc">เรียงตามชื่อ (A-Z)</option>
+                    <option value="name-desc">เรียงตามชื่อ (Z-A)</option>
+                    <option value="price-asc">เรียงตามราคา (น้อยไปมาก)</option>
+                    <option value="price-desc">เรียงตามราคา (มากไปน้อย)</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="generation-filter" class="form-label">เจเนอเรชัน</label>
+                <select id="generation-filter" class="form-select">
+                    <option value="">ทั้งหมด</option>
+                    <!-- Generation options will be inserted here by JavaScript -->
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">ประเภท</label>
+                <div id="type-filters" class="d-flex flex-wrap gap-2">
+                    <!-- Type filter buttons will be inserted here by JavaScript -->
+                </div>
+            </div>
         </div>
     </div>
 
@@ -95,14 +161,12 @@
                             <!-- Left Column: Image and Sprites -->
                             <div class="col-lg-5 text-center">
                                 <div class="main-img-container mb-3">
-                                    <!-- Main image loaded by JS -->
+                                    <img id="main-pokemon-img" class="img-fluid" alt="Main Pokemon Image">
                                 </div>
                                 <div class="sprite-slider-container position-relative">
-                                    <button class="slider-arrow prev" id="slider-arrow-prev">&lt;</button>
                                     <div class="sprite-slider" id="sprite-slider">
                                         <!-- Sprites loaded by JS -->
                                     </div>
-                                    <button class="slider-arrow next" id="slider-arrow-next">&gt;</button>
                                 </div>
                             </div>
 
@@ -167,7 +231,154 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <!-- Battle Screen -->
+    <div id="battle-screen" class="container mt-4" style="display: none;">
+        <h2 class="text-center mb-4">Battle!</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h4 id="opponent-pokemon-name"></h4>
+                                <div class="progress" style="height: 15px;">
+                                    <div id="opponent-pokemon-hp-bar" class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <small id="opponent-pokemon-hp"></small>
+                            </div>
+                            <img id="opponent-pokemon-sprite" src="" alt="Opponent Pokemon" style="width: 100px; height: 100px;">
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <img id="player-pokemon-sprite" src="" alt="Player Pokemon" style="width: 100px; height: 100px;">
+                            <div>
+                                <h4 id="player-pokemon-name" class="text-end"></h4>
+                                <div class="progress" style="height: 15px;">
+                                    <div id="player-pokemon-hp-bar" class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <small id="player-pokemon-hp" class="text-end"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <p id="battle-message" class="text-center fs-5"></p>
+                        <div id="command-menu" class="row mt-3">
+                            <div class="col-6 mb-2"><button id="attack-button" class="btn btn-primary w-100">Attack</button></div>
+                            <div class="col-6 mb-2"><button id="switch-button" class="btn btn-info w-100">Switch Pokemon</button></div>
+                            <div class="col-6 mb-2"><button id="item-button" class="btn btn-warning w-100">Item</button></div>
+                            <div class="col-6 mb-2"><button id="run-button" class="btn btn-danger w-100">Run</button></div>
+                        </div>
+                        <div id="moves-container" class="row mt-3" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4 text-center">
+        <button id="start-battle-btn" class="btn btn-lg btn-success">Start Test Battle</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="src/js/script.js"></script>
+    <script type="module" src="src/js/battle.js"></script>
+    <script type="module" src="src/js/battleUI.js"></script>
+    <script type="module" src="src/js/battleAI.js"></script>
+    <!-- Team Builder Modal -->
+    <div class="modal fade" id="teamBuilderModal" tabindex="-1" aria-labelledby="teamBuilderModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="teamBuilderModalLabel"><i class="bi bi-people-fill"></i>
+                        ทีมโปเกมอนของฉัน</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-info" id="analyze-team-btn" disabled><i
+                            class="bi bi-bar-chart-line-fill"></i> วิเคราะห์ทีม</button>
+                    <div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                        <button type="button" class="btn btn-danger" id="clear-team-btn">ล้างทีม</button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="team-items" class="row g-2">
+                        <!-- Team Pokémon will be inserted here by JavaScript -->
+                        <p class="text-center text-muted">ยังไม่มีโปเกมอนในทีมของคุณ</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Compare Modal -->
+    <div class="modal fade" id="compareModal" tabindex="-1" aria-labelledby="compareModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="compareModalLabel"><i class="bi bi-columns-gap"></i> เปรียบเทียบโปเกมอน
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                    <button type="button" class="btn btn-danger" id="clear-compare-btn">ล้างทั้งหมด</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="compare-pokemon-container">
+                        <!-- Pokémon comparison cards will be inserted here by JavaScript -->
+                        <p class="text-center text-muted">เลือกโปเกมอน 2 ตัวเพื่อเปรียบเทียบ</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Analytics Modal -->
+    <div class="modal fade" id="analyticsModal" tabindex="-1" aria-labelledby="analyticsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="analyticsModalLabel"><i class="bi bi-bar-chart-line-fill"></i>
+                        ผลการวิเคราะห์ทีม</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="analytics-loading" class="text-center p-5" style="display: none;">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">กำลังวิเคราะห์ข้อมูล...</p>
+                    </div>
+                    <div id="analytics-content">
+                        <div class="row">
+                            <div class="col-lg-7 mb-4">
+                                <h6 class="text-center mb-3">การแพ้ทาง/ชนะทางของทีม</h6>
+                                <div style="height: 350px; position: relative;">
+                                    <canvas id="type-chart"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 mb-4">
+                                <h6 class="text-center mb-3">ภาพรวมค่าพลังของทีม</h6>
+                                <div style="height: 350px; position: relative;">
+                                    <canvas id="stats-radar-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

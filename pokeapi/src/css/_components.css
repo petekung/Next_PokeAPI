@@ -1,0 +1,156 @@
+/* Product Card Styles */
+.product-card {
+    transition: transform .2s ease-in-out, box-shadow .2s ease-in-out;
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    background-color: #fff;
+    padding: 1rem;
+    height: 180px;
+    object-fit: contain;
+}
+
+.card-title {
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.card-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Type Filter Buttons */
+.type-filter-btn {
+    margin-bottom: 0.5rem;
+    text-transform: capitalize;
+}
+
+.type-filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Image Loader Styles */
+.img-container {
+    position: relative;
+    /* background-color: #f8f9fa; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .25rem;
+}
+
+.img-container .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 4px solid #e9ecef;
+    border-radius: 50%;
+    border-top: 4px solid #0d6efd;
+    width: 30px;
+    height: 30px;
+    animation: spin 1.5s linear infinite;
+    z-index: 1;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.img-container img {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    /* width: 100%;
+    height: 100%; */
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+}
+
+.img-container img.loaded {
+    opacity: 1;
+}
+
+/* Team Analytics Modal */
+#analytics-content {
+    min-height: 400px; /* Ensure it doesn't collapse while loading */
+}
+
+#type-chart, #stats-radar-chart {
+    max-width: 100%;
+}
+
+#analytics-loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+/* Animated Stat Bars with Colors */
+.stat-row { display: flex; align-items: center;   }
+.stat-name { width: 140px; text-transform: capitalize; font-weight: 500; flex-shrink: 0; }
+.stat-value { width: 40px; text-align: right; font-weight: 700; }
+.stat-bar-container { flex-grow: 1; height: 14px; background-color: var(--light-grey); border-radius: 7px; overflow: hidden; }
+.stat-bar { height: 100%; border-radius: 7px; width: 0%; transition: width 1s cubic-bezier(0.25, 1, 0.5, 1); }
+
+/* Specific Stat Colors */
+.stat-bar.stat-hp { background-image: linear-gradient(45deg, #28a745, #20c997); } /* Green */
+.stat-bar.stat-attack { background-image: linear-gradient(45deg, #dc3545, #fd7e14); } /* Red/Orange */
+.stat-bar.stat-defense { background-image: linear-gradient(45deg, #0d6efd, #0dcaf0); } /* Blue/Cyan */
+.stat-bar.stat-special-attack { background-image: linear-gradient(45deg, #6f42c1, #d63384); } /* Purple/Pink */
+.stat-bar.stat-special-defense { background-image: linear-gradient(45deg, #17a2b8, #20c997); } /* Teal/Green */
+.stat-bar.stat-speed { background-image: linear-gradient(45deg, #ffc107, #fd7e14); } /* Yellow/Orange */
+
+/* Evolution Chain */
+.evolution-body { display: flex; justify-content: center; align-items: center; }
+.evolution-chain {
+    gap: .5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.evolution-stage {
+    padding: .5rem;
+    border-radius: .5rem;
+    transition: all .2s ease-in-out;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.evolution-stage:hover { background-color: #f8f9fa; }
+
+.evolution-stage.active {
+    background-color: #e9ecef;
+    border-color: #0d6efd;
+    transform: scale(1.05);
+}
+
+.evolution-img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+}
+
+.evolution-arrow {
+    color: #6c757d;
+    font-size: 1.5rem;
+    align-self: center;
+    margin: 0 0.5rem;
+}
